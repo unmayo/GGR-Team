@@ -12,7 +12,7 @@
         background-color: #121212;
         background-size: cover;
         background-repeat: no-repeat;
-        animation: background-shuffle 60s infinite; /* Changed duration from 32s to 60s */
+        animation: background-shuffle 60s infinite;
       }
 
       @keyframes background-shuffle {
@@ -20,22 +20,18 @@
           background-image: url("a1.jpg");
           background-position: left center;
         }
-
         25% {
           background-image: url("a2.jpg");
           background-position: right center;
         }
-
         50% {
           background-image: url("a3.jpg");
           background-position: left center;
         }
-
         75% {
           background-image: url("a4.jpg");
           background-position: right center;
         }
-
         100% {
           background-image: url("a1.jpg");
           background-position: left center;
@@ -59,47 +55,6 @@
         transition: all 0.3s ease;
       }
 
-      @media (max-width: 1024px) {
-        .black-box {
-          left: -40vw;
-          top: -5vh;
-          width: 50%;
-          height: 180vh;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .black-box {
-          left: -50vw;
-          top: 10vh;
-          width: 60%;
-          height: 200vh;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .black-box {
-          left: -60vw;
-          top: 15vh;
-          width: 70%;
-          height: 220vh;
-        }
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(0);
-        }
-
-        50% {
-          transform: translateY(-15px);
-        }
-
-        100% {
-          transform: translateY(0);
-        }
-      }
-
       .title-image {
         position: absolute;
         top: 20px;
@@ -115,27 +70,14 @@
       }
 
       .play-gif {
-        width: 300px; /* Increased size */
-        height: 300px; /* Increased size */
+        width: 300px;
+        height: 300px;
         cursor: pointer;
         transition: transform 0.3s ease;
-        position: fixed; /* Make it fixed position */
-        bottom: 10px; /* Position it at the bottom right corner */
-        right: 10px; /* Position it at the bottom right corner */
-        z-index: 3; /* Ensure it's above other elements */
-      }
-
-      .play-gif.spinning {
-        animation: spin 1s linear infinite; /* Rotate the gif */
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 3;
       }
 
       .gif-container {
@@ -149,47 +91,37 @@
       }
 
       .button-stack {
-        position: absolute;
-        top: calc(20px + 400px + 20px);
-        left: 80px;
+        position: fixed;
+        bottom: 100px; /* Adjust this value to control vertical position */
+        left: 80px; /* Starting position for the first button */
         z-index: 3;
-        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 30px; /* Space between buttons */
       }
 
       .button-stack img {
         width: 12vw;
         height: 6.5vw;
         cursor: pointer;
-        position: relative;
-        transition: left 0.3s ease, top 0.3s ease;
+        transition: transform 0.3s ease;
       }
 
-      .button-stack img:nth-child(1) {
-        left: 0;
-        top: 0;
+      /* Modify margin for stair step effect */
+      #btn1 {
+        margin-left: 0; /* First button, no margin */
       }
 
-      .button-stack img:nth-child(2) {
-        left: -2vw;
-        top: 8vw;
+      #btn2 {
+        margin-left: 30px; /* Second button, shift to the right */
       }
 
-      .button-stack img:nth-child(3) {
-        left: -4vw;
-        top: 16vw;
-        margin-bottom: 20px;
+      #btn3 {
+        margin-left: 60px; /* Third button, shift further to the right */
       }
 
       .button-stack img:hover {
-        left: 2vw;
-      }
-
-      .button-stack img:nth-child(2):hover {
-        left: 0;
-      }
-
-      .button-stack img:nth-child(3):hover {
-        left: 0.5vw;
+        transform: scale(1.1); /* Scale up on hover */
       }
 
       #visualizer {
@@ -257,10 +189,10 @@
 
       /* Center the social buttons */
       .social-buttons {
-        position: fixed; /* Align to viewport */
-        top: 50%; /* Center vertically */
-        left: 50%; /* Center horizontally */
-        transform: translate(-50%, -50%); /* Translate to truly center */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
         gap: 20px;
         justify-content: center;
@@ -275,8 +207,8 @@
         background-color: #f0f0f0;
         border: none;
         border-radius: 15px;
-        width: 350px; /* Set fixed width */
-        height: 350px; /* Set fixed height */
+        width: 350px;
+        height: 350px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease, width 0.4s ease,
           height 0.4s ease;
@@ -295,15 +227,15 @@
       /* Responsive behavior for the buttons */
       @media (max-width: 768px) {
         .social-button {
-          width: 40vw; /* Adjust width according to viewport */
-          height: 40vw; /* Maintain aspect ratio */
+          width: 40vw;
+          height: 40vw;
         }
       }
 
       @media (max-width: 480px) {
         .social-button {
-          width: 100px; /* Set minimum size for very small screens */
-          height: 100px; /* Maintain aspect ratio */
+          width: 100px;
+          height: 100px;
         }
       }
     </style>
@@ -312,7 +244,6 @@
   <body>
     <div class="black-box"></div>
     <img src="GGR_R.png" alt="Page Title" class="title-image" />
-
     <img src="disc.gif" alt="Play Music" id="playGif" class="play-gif" />
     <audio id="audio" src="audiobg.mp3" loop></audio>
 
@@ -518,8 +449,8 @@
       // Mousemove event for cursor tracking:
       document.addEventListener("mousemove", function (event) {
         const { clientX, clientY } = event;
-        const x = (clientX / window.innerWidth) * 10 - 5; // Values from -5 to 5
-        const y = (clientY / window.innerHeight) * 10 - 5; // Values from -5 to 5
+        const x = (clientX / window.innerWidth) * 10 - 5;
+        const y = (clientY / window.innerHeight) * 10 - 5;
         document.body.style.backgroundPosition = `${x}px ${y}px`;
       });
     </script>
@@ -537,12 +468,12 @@
       playGif.addEventListener("click", () => {
         if (audio.paused) {
           audio.play();
-          playGif.classList.add("spinning"); // Add spinning class
+          playGif.classList.add("spinning");
           gifContainer.style.display = "block";
           visualizer.style.display = "block";
         } else {
           audio.pause();
-          playGif.classList.remove("spinning"); // Remove spinning class
+          playGif.classList.remove("spinning");
           gifContainer.style.display = "none";
           visualizer.style.display = "none";
         }
